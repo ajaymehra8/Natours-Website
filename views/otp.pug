@@ -1,0 +1,13 @@
+extends base
+
+block content
+  main.main
+    .login-form
+      form.form.form--signup
+        .form__group
+          label.form__label(for='otp') Enter otp
+          input#otp.form__input(type='text', placeholder='OTP sents in provided gmail', required)
+       
+        
+        .form__group
+          button.btn.btn--green.btn--otp Verify
