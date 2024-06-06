@@ -375,7 +375,11 @@ body {
     from(#7dd56f),
     to(#28b487)
   );
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background-image: linear-gradient(
+    to right bottom,
+    #7dd56f,
+    #28b487
+  );
   opacity: 0.85;
 }
 
@@ -779,7 +783,11 @@ body {
     from(#7dd56f),
     to(#28b487)
   );
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background-image: linear-gradient(
+    to right bottom,
+    #7dd56f,
+    #28b487
+  );
   padding: 4rem 0;
 }
 .user-view__content {
@@ -896,7 +904,8 @@ body {
 }
 .nav__el,
 .nav__el:link,
-.nav__el:visited {
+.nav__el:visited,
+.nav-link {
   color: #f7f7f7;
   text-transform: uppercase;
   font-size: 1.6rem;
@@ -1116,7 +1125,11 @@ body {
     from(#7dd56f),
     to(#28b487)
   );
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background-image: linear-gradient(
+    to right bottom,
+    #7dd56f,
+    #28b487
+  );
   opacity: 0.7;
 }
 .card__picture-img {
@@ -1323,3 +1336,150 @@ body {
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
 }
+/* My code for responsiveness */
+.resBtn {
+  display: none;
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  font-size: 30px;
+  background: #444;
+  border: none;
+  color: white;
+}
+@media (width<500px) {
+  body{
+    padding: 0;
+  }
+  .header__logo {
+    position: absolute;
+    left: 20px;
+    top: 30%;
+  }
+  .nav--user{
+    position: absolute;
+    top:80px;
+    background:#444;
+    width: 100vw;
+    padding-bottom: 30px;
+    display: none;
+  }
+  .resBtn {
+    display: inherit;
+  }
+  .nav-btn {
+    font-size: 20px !important;
+  }
+
+ /* Cards style */
+ .card-container {
+  
+  grid-template-columns:1fr;
+}
+
+.card__details,.card__footer {
+
+  padding: 1rem 1rem;
+}
+/* FOOTER STYLE */
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  justify-content: center;
+  align-items: center;
+}
+.footer__nav {
+  
+  display: flex;
+  justify-content: flex-start;
+padding-right: 20px;
+  gap:12px;
+}
+.footer__nav li{
+  text-align: center;
+}
+/* TOUR DETAILS STYLE */
+.section-header {
+  position: relative;
+  height: 55vh;
+
+
+ 
+}
+
+.heading-primary
+ {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 40px;
+  margin-top: 25%;
+  width: 350px;
+  letter-spacing: 0;
+}
+.section-description{
+  display: flex;
+  flex-direction: column;
+}
+.overview-box {
+  background-color: #f7f7f7;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: flex-start;
+}
+
+.description-box .description__text {
+  font-size: 1.4rem;
+}
+.picture-box__img {
+  
+  height: 40vh;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.picture-box__img--1,
+.picture-box__img--2,
+.picture-box__img--3 {
+  padding-bottom: 0;
+}
+.section-map {
+  height: 50rem;
+}
+.cta__content{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.myBtn{
+  width: 240px;
+  margin-right:50%;
+}
+.heading-secondary{
+  width: 240px;
+
+}
+.cta__text{
+  width: 240px;
+}
+.cta__img {
+  height: 10rem;
+  width: 10rem;
+ 
+}
+.tourText{
+  visibility:hidden;
+}
+/* Signup and login form */
+.loginH {
+  padding: 5rem 3rem;
+  
+}
+.loginText{
+  width: 400px;
+}
+}
+

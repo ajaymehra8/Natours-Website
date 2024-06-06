@@ -18,7 +18,7 @@ export const signup = async (name,email, password,passwordConfirm) => {
     if (res.data.status === 'success') {
       showAlert('success','Check your email for otp');
       window.setTimeout(() => {
-        location.assign('/verify-otp');
+        location.assign('/');
       }, 1000);
     } else {
       showAlert('error',res.data.message);
