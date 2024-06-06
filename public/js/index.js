@@ -11,10 +11,14 @@ const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form--login');
 const signupForm = document.querySelector('.form--signup');
 
+
 const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
+const resBtn=document.querySelector(".resBtn");
+const navSection=document.querySelector(".nav--user");
+const navBtns=document.querySelectorAll(".nav-btn");
 
 // DELEGATION
 if (mapBox) {
@@ -81,3 +85,20 @@ if (bookBtn)
 
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 20);
+
+// responsive code by me
+let click=false;
+if(resBtn){
+  resBtn.addEventListener('click',()=>{
+    if(!click){
+navSection.style.display="inherit";
+click=true;
+
+    }else{
+      navSection.style.display="none";
+      
+      click=false;
+
+    }
+  })
+}
