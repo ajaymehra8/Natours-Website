@@ -5774,6 +5774,8 @@ var bookBtn = document.getElementById('book-tour');
 var resBtn = document.querySelector(".resBtn");
 var navSection = document.querySelector(".nav--user");
 var navBtns = document.querySelectorAll(".nav-btn");
+var menuBar = document.querySelector(".user-view__menu");
+var menuBtn = document.querySelector(".usResBtn");
 
 // DELEGATION
 if (mapBox) {
@@ -5856,6 +5858,19 @@ if (resBtn) {
     }
   });
 }
+if (menuBtn) {
+  menuBtn.addEventListener('click', function () {
+    if (!click) {
+      menuBar.style.left = "0";
+      menuBtn.style.left = "".concat(menuBar.offsetWidth - 50, "px");
+      click = true;
+    } else {
+      menuBar.style.left = "-100%";
+      menuBtn.style.left = "-50px";
+      click = false;
+    }
+  });
+}
 },{"./mapbox.js":"mapbox.js","./login.js":"login.js","./signup.js":"signup.js","./updateSettings.js":"updateSettings.js","./stripe.js":"stripe.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -5881,7 +5896,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63397" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49420" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

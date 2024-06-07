@@ -19,6 +19,8 @@ const bookBtn = document.getElementById('book-tour');
 const resBtn=document.querySelector(".resBtn");
 const navSection=document.querySelector(".nav--user");
 const navBtns=document.querySelectorAll(".nav-btn");
+const menuBar=document.querySelector(".user-view__menu");
+const menuBtn=document.querySelector(".usResBtn");
 
 // DELEGATION
 if (mapBox) {
@@ -101,4 +103,23 @@ click=true;
 
     }
   })
+}
+
+if(menuBtn){
+  menuBtn.addEventListener('click',()=>{
+    if(!click){
+
+menuBar.style.left="0";
+menuBtn.style.left=`${menuBar.offsetWidth-50}px`;
+
+
+click=true;
+
+    }else{
+      menuBar.style.left="-100%";
+      menuBtn.style.left="-50px";
+      click=false;
+
+    }
+});
 }
