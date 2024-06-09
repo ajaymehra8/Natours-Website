@@ -1,13 +1,13 @@
 const { initializeApp }= require("firebase/app");
 const { getStorage }= require("firebase/storage");
 const firebaseConfig = {
-  apiKey: "AIzaSyDbhQdnMBaPE7JgDeSWfgKLUMkWG_r4iSM",
-  authDomain: "natours-21ccd.firebaseapp.com",
-  projectId: "natours-21ccd",
-  storageBucket: "natours-21ccd.appspot.com",
-  messagingSenderId: "261143255911",
-  appId: "1:261143255911:web:e514190819c2d89341adc2",
-  measurementId: "G-X8Y3QHE2E1"
+  apiKey: process.env.apikey,
+  authDomain: process.env.authDomain,
+  projectId: process.env.projectId,
+  storageBucket:process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId:process.env.appId,
+  measurementId:process.env.measurementId
 };
 
 const app = initializeApp(firebaseConfig);
