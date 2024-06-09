@@ -4,6 +4,8 @@ const Users = require('../models/userModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
+const { storage }=require('./firebaseConfig');
+const {ref,uploadBytesResumable,getDownloadURL}= require('firebase/storage');
 
 // const multerStorage=multer.diskStorage({
 //   destination:(req,file,cb)=>{
@@ -16,9 +18,10 @@ const factory = require('./handlerFactory');
 //   }
 // });
 
+// IF FIREBASE NOT WORKS UNCOMMENT THIS
 const multerStorage = multer.memoryStorage();
 const multerFilter = (req, file, cb) => {
-  // console.log(file);
+  console.log(file);
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
@@ -34,18 +37,56 @@ const upload = multer({
 });
 const uploadUserPhoto = upload.single('photo');
 
-// Here we edit image because user can send any size of image
-const resizeUserPhoto = catchAsync(async(req, res, next) => {
+const resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
-  req.file.filename=`user-${req.user.id}-${Date.now()}.jpeg`;
-  await sharp(req.file.buffer)
+
+  // Process the image using sharp and store it back to req.file.buffer
+  req.file.buffer = await sharp(req.file.buffer)
     .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`public/img/users/${req.file.filename}`);
+    .toBuffer();
 
-    next();
+  next();
 });
+
+
+const uploadPhotoToFirebase = catchAsync(async (req, res, next) => {
+  if (!req.file) {
+    return next(new AppError('No file uploaded!', 400));
+  }
+
+  const fileBuffer = req.file.buffer;
+  const fileName = req.file.originalname;
+
+  try {
+    const storageRef = ref(storage, `users/${fileName}`);
+    const uploadTask = uploadBytesResumable(storageRef, fileBuffer);
+
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        console.log('Uploading...');
+      },
+      (err) => {
+        console.error(err.message);
+        return next(new AppError('Upload failed!', 500));
+      },
+      async () => {
+        const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+        req.file.filename = downloadUrl;
+        console.log('Download URL:', downloadUrl);
+
+next();      }
+    );
+  } catch (err) {
+    console.error(err);
+    return next(new AppError('An error occurred during the upload process!', 500));
+  }
+});
+
+
+// Here we edit image because user can send any size of image
+
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -122,5 +163,6 @@ module.exports = {
   deleteMe,
   getMe,
   uploadUserPhoto,
-  resizeUserPhoto
+  resizeUserPhoto,
+  uploadPhotoToFirebase
 };

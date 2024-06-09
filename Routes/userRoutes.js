@@ -10,7 +10,8 @@ const {
   deleteMe,
   getMe,
   uploadUserPhoto,
-  resizeUserPhoto
+  resizeUserPhoto,
+  uploadPhotoToFirebase
 } = require('../controllers/userController');
 const {
   signup,
@@ -47,6 +48,7 @@ userRouter.patch(
   '/update-user',
   uploadUserPhoto,
   resizeUserPhoto,
+  uploadPhotoToFirebase,
   updateMe
 );
 userRouter.delete(
