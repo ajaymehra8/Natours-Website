@@ -41,7 +41,7 @@ block content
               label.form__label(for='email') Email address
               input#email.form__input(type='email', value=`${user.email}`, required, name='email')
             .form__group.form__photo-upload
-              img.form__user-photo(src=user.photo, onerror="console.log('Image failed to load'); this.onerror=null; this.src='/img/users/default.jpeg';", alt='User photo')
+              img.form__user-photo#userImg(src=user.photo, onerror="console.log('Image failed to load'); this.onerror=null; this.src='/img/users/default.jpeg';", alt='User photo')
               input.form__upload(type='file', accept='image/*', id='photo', name='photo')
               label(for='photo') Choose new photo
               
