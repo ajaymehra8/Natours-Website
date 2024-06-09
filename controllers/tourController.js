@@ -56,6 +56,39 @@ await Promise.all(req.files.images.map(async(file,i)=>{
   next();
 });
 
+const uploadTourPhotoToFirebase = catchAsync(async (req, res, next) => {
+  if (!req.file) {
+    return next(new AppError('No file uploaded!', 400));
+  }
+
+  const fileBuffer = req.file.buffer;
+  const fileName = req.file.originalname;
+
+  try {
+    const storageRef = ref(storage, `tours/${fileName}`);
+    const uploadTask = uploadBytesResumable(storageRef, fileBuffer);
+
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        console.log('Uploading...');
+      },
+      (err) => {
+        console.error(err.message);
+        return next(new AppError('Upload failed!', 500));
+      },
+      async () => {
+        const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+        req.file.filename = downloadUrl;
+        console.log('Download URL:', downloadUrl);
+
+next();      }
+    );
+  } catch (err) {
+    console.error(err);
+    return next(new AppError('An error occurred during the upload process!', 500));
+  }
+});
+
 const getTours =factory.getAll(Tours);
 const getTour =factory.getOne(Tours,{path:'reviews'});
 

@@ -5,7 +5,8 @@ const {
   getLoginForm,
   getSignupForm,
   getAccount,
-  getMyTours
+  getMyTours,
+  getReviewsOfUser
 } = require('../controllers/viewController');
 const authController = require('../controllers/authController');
 const bookingController = require('../controllers/bookingController');
@@ -28,7 +29,10 @@ router.get(
 
 router.get('/login', authController.isLoggedIn, getLoginForm);
 
+
 router.get('/signup', authController.isLoggedIn, getSignupForm);
+
+router.get('/my-reviews', authController.protect, getReviewsOfUser);
 
 router.get('/me', authController.protect, getAccount);
 router.get('/my-tours', authController.protect,getMyTours);

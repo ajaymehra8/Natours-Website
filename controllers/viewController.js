@@ -1,5 +1,7 @@
 
 const Tour=require('../models/tourModel');
+const Review=require('../models/reviewModel');
+
 const AppError = require('../utils/appError');
 const catchAsync=require('../utils/catchAsync');
 const User=require('../models/userModel');
@@ -48,6 +50,14 @@ title:'Your Account'
 
   }); 
 });
+exports.getReviewsOfUser=catchAsync(async(req,res)=>{
+  const reviews=await Review.find({user:req.user.id});
+  console.log(reviews);
+  res.status(200).render('review',{
+    totalReviews:reviews.length,
+    reviews
+  })
+  })
 exports.getMyTours=catchAsync(async(req,res,next)=>{
 // 1) Find All booking
 // console.log('hello');

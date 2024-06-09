@@ -8,9 +8,11 @@ const {
   updateReview,
   setTourUserId,
   getReview,
+  getReviewsOfUser
 } = require('../controllers/reviewControler');
 
 Router.use(authController.protect);
+Router.get('/my-reviews',getReviewsOfUser);
 Router.route('/')
   .post(
     authController.restrictTour('user'),
@@ -22,5 +24,6 @@ Router.route('/:id')
   .delete(deleteReview)
   .patch(authController.restrictTour('admin','user'),updateReview)
   .get(authController.restrictTour('admin','user'),getReview);
+Router.route('/:user');
 
 module.exports = Router;
