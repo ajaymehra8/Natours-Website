@@ -16,10 +16,9 @@ export const updateSettings = async (data, type) => {
     });
 
     if (res.data.status === 'success') {
-      console.log("dhhs");
       window.setTimeout(() => {
         console.log('Redirecting to homepage...');
-        location.assign('/');
+        location.assign('/me');
       }, 1000);
       showAlert('success', `${type.toUpperCase()} updated successfully!`);
       

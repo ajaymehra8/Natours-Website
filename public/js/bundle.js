@@ -368,15 +368,24 @@ var updateSettings = exports.updateSettings = /*#__PURE__*/function () {
         case 4:
           res = _context.sent;
           if (res.data.status === 'success') {
+            window.setTimeout(function () {
+              console.log('Redirecting to homepage...');
+              location.assign('/me');
+            }, 1000);
             (0, _alerts.showAlert)('success', "".concat(type.toUpperCase(), " updated successfully!"));
+
+            // Debugging log to check if this part is reached
+            console.log('Update successful, preparing to redirect.');
           }
-          _context.next = 11;
+          _context.next = 12;
           break;
         case 8:
           _context.prev = 8;
           _context.t0 = _context["catch"](0);
+          // Debugging log to check if an error occurred
+          console.error('Update failed:', _context.t0.response.data.message);
           (0, _alerts.showAlert)('error', _context.t0.response.data.message);
-        case 11:
+        case 12:
         case "end":
           return _context.stop();
       }
@@ -5771,11 +5780,13 @@ var logOutBtn = document.querySelector('.nav__el--logout');
 var userDataForm = document.querySelector('.form-user-data');
 var userPasswordForm = document.querySelector('.form-user-password');
 var bookBtn = document.getElementById('book-tour');
-var resBtn = document.querySelector(".resBtn");
-var navSection = document.querySelector(".nav--user");
-var navBtns = document.querySelectorAll(".nav-btn");
-var menuBar = document.querySelector(".user-view__menu");
-var menuBtn = document.querySelector(".usResBtn");
+var resBtn = document.querySelector('.resBtn');
+var navSection = document.querySelector('.nav--user');
+var navBtns = document.querySelectorAll('.nav-btn');
+var menuBar = document.querySelector('.user-view__menu');
+var menuBtn = document.querySelector('.usResBtn');
+var imageUpload = document.getElementById("photo");
+var userImg = document.getElementById("userImg");
 
 // DELEGATION
 if (mapBox) {
@@ -5850,10 +5861,10 @@ var click = false;
 if (resBtn) {
   resBtn.addEventListener('click', function () {
     if (!click) {
-      navSection.style.display = "inherit";
+      navSection.style.display = 'inherit';
       click = true;
     } else {
-      navSection.style.display = "none";
+      navSection.style.display = 'none';
       click = false;
     }
   });
@@ -5861,13 +5872,26 @@ if (resBtn) {
 if (menuBtn) {
   menuBtn.addEventListener('click', function () {
     if (!click) {
-      menuBar.style.left = "0";
+      menuBar.style.left = '0';
       menuBtn.style.left = "".concat(menuBar.offsetWidth - 50, "px");
       click = true;
     } else {
-      menuBar.style.left = "-100%";
-      menuBtn.style.left = "-50px";
+      menuBar.style.left = '-100%';
+      menuBtn.style.left = '-50px';
       click = false;
+    }
+  });
+}
+if (imageUpload) {
+  imageUpload.addEventListener('change', function (event) {
+    console.log("working");
+    var file = event.target.files[0];
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        userImg.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   });
 }
@@ -5896,7 +5920,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49420" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63157" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

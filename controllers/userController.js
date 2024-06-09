@@ -39,7 +39,7 @@ const uploadUserPhoto = upload.single('photo');
 
 const resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
-
+  console.log(req.file);
   // Process the image using sharp and store it back to req.file.buffer
   req.file.buffer = await sharp(req.file.buffer)
     .resize(500, 500)
@@ -55,6 +55,7 @@ const uploadPhotoToFirebase = catchAsync(async (req, res, next) => {
   if (!req.file) {
     return next(new AppError('No file uploaded!', 400));
   }
+  
 
   const fileBuffer = req.file.buffer;
   const fileName = req.file.originalname;
@@ -68,7 +69,7 @@ const uploadPhotoToFirebase = catchAsync(async (req, res, next) => {
         console.log('Uploading...');
       },
       (err) => {
-        console.error(err.message);
+        console.error(err);
         return next(new AppError('Upload failed!', 500));
       },
       async () => {

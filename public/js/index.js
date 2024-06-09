@@ -22,6 +22,8 @@ const navSection = document.querySelector('.nav--user');
 const navBtns = document.querySelectorAll('.nav-btn');
 const menuBar = document.querySelector('.user-view__menu');
 const menuBtn = document.querySelector('.usResBtn');
+const imageUpload=document.getElementById("photo");
+const userImg=document.getElementById("userImg");
 
 // DELEGATION
 if (mapBox) {
@@ -124,4 +126,17 @@ if (menuBtn) {
       click = false;
     }
   });
+}
+if(imageUpload){
+  imageUpload.addEventListener('change', function(event) {
+    console.log("working")
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            userImg.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
 }
