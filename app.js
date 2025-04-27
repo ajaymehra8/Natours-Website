@@ -94,7 +94,8 @@ app.all('*', (req, res, next) => {
 
 app.use((err, req, res, next) => {
 errorController(err, req, res, next);
-});// listening to the port
+});
+// listening to the port
 const server = app.listen(8000, () => {
   console.log('Listening at 8000');
 });

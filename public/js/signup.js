@@ -22,9 +22,12 @@ export const signup = async (name,email, password,passwordConfirm) => {
       }, 1000);
     } else {
       showAlert('error',res.data.message);
+      signupBtn.textContent="Sign up";
+
     }
   } catch (err) {
     showAlert('error','Problem in signup');
+    signupBtn.textContent="Sign up";
 
     // console.log(err.response.data);
   }

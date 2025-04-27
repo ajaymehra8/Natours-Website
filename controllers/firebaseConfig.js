@@ -9,7 +9,6 @@ const firebaseConfig = {
   appId:process.env.APP_ID,
   measurementId:process.env.MEASURMENT_ID
 };
-console.log('Firebase Config:', firebaseConfig);
 
 const app = initializeApp(firebaseConfig);
 exports.storage=getStorage(app);

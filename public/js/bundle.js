@@ -353,43 +353,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // type is either 'password' or 'data'
 var updateSettings = exports.updateSettings = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(data, type) {
-    var url, res;
+    var updateBtn, url, res;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
+          updateBtn = document.querySelector(".updateBtn");
+          _context.prev = 1;
+          updateBtn.innerText = "Updating...";
           url = type === 'password' ? '/api/v1/users/update-password' : '/api/v1/users/update-user';
-          _context.next = 4;
+          _context.next = 6;
           return axios({
             method: 'PATCH',
             url: url,
             data: data
           });
-        case 4:
+        case 6:
           res = _context.sent;
           if (res.data.status === 'success') {
             window.setTimeout(function () {
-              console.log('Redirecting to homepage...');
               location.assign('/me');
             }, 1000);
             (0, _alerts.showAlert)('success', "".concat(type.toUpperCase(), " updated successfully!"));
 
             // Debugging log to check if this part is reached
-            console.log('Update successful, preparing to redirect.');
+            updateBtn.innerText = "Save settings";
           }
-          _context.next = 12;
+          _context.next = 14;
           break;
-        case 8:
-          _context.prev = 8;
-          _context.t0 = _context["catch"](0);
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context["catch"](1);
           // Debugging log to check if an error occurred
-          console.error('Update failed:', _context.t0.response.data.message);
           (0, _alerts.showAlert)('error', _context.t0.response.data.message);
-        case 12:
+          updateBtn.innerText = "Save settings";
+        case 14:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[1, 10]]);
   }));
   return function updateSettings(_x, _x2) {
     return _ref.apply(this, arguments);
@@ -5920,7 +5921,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63157" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50621" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

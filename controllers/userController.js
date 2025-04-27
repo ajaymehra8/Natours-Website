@@ -86,7 +86,6 @@ next();      }
 });
 
 
-// Here we edit image because user can send any size of image
 
 
 const filterObj = (obj, ...allowedFields) => {
